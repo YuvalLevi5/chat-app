@@ -14,6 +14,8 @@ const App = () => {
           <Route excat path='/register' element={<Register />} />
         </Routes>
       </div>
+      <NavLink to="/register">Bla</NavLink>
+      <NavLink to="/login">Bla</NavLink>
     </Router>
   )
 }
