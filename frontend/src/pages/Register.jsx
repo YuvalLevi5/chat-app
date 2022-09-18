@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom';
+import Logo from '../assets/logo.svg'
 const Register = () => {
 
   const handleSubmit = (event) => {
@@ -8,12 +9,16 @@ const Register = () => {
     alert("form")
   }
 
+  const handleChange  = (event) => {
+
+  }
+
   return (
     <>
-      <FormContainer>
+      <section className='form-container'>
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <img src="" alt="" />
+            <img src={Logo} alt="" />
             <h1>Snappy</h1>
           </div>
           <input type="text" placeholder='Username' name='username' onChange={e=> handleChange(e)}/>
@@ -21,13 +26,13 @@ const Register = () => {
           <input type="password" placeholder='Password' name='password' onChange={e=> handleChange(e)}/>
           <input type="password" placeholder='Confirm Password' name='confirm-password' onChange={e=> handleChange(e)}/>
           <button type='submit'>Create User</button>
-          <span>already have an account? <NavLink to='/login'>Login</NavLink>  </span>
+          <span>Already have an account? <NavLink to='/login'>Login</NavLink>  </span>
         </form>
-      </FormContainer>
+      </section>
     </>
   )
 }
 
-const FormContainer = styled.div``
+
 
 export default Register
