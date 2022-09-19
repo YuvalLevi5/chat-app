@@ -1,5 +1,6 @@
 import React from 'react'
-import { HashRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
+import SetAvatar from './components/SetAvatar';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,13 +10,14 @@ const App = () => {
     <Router>
       <div className='app'>
         <Routes>
-          <Route excat path='' element={<Chat />} />
-          <Route excat path='/login' element={<Login />} />
-          <Route excat path='/register' element={<Register />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/setAvatar" element={<SetAvatar />} />
+          <Route path="" element={<Chat />} />
         </Routes>
       </div>
-      <NavLink to="/register">Bla</NavLink>
-      <NavLink to="/login">Bla</NavLink>
+      {/* <NavLink to="/register">Bla</NavLink>
+      <NavLink to="/login">Bla</NavLink> */}
     </Router>
   )
 }
