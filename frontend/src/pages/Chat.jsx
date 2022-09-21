@@ -8,6 +8,7 @@ const Chat = () => {
   const navigate = useNavigate()
   const [contacts, setContacts] = useState([])
   const [currentUser, setCurrentUser] = useState(undefined)
+  const [currentChat, setCurrentChat] = useState(undefined)
 
   useEffect(() => {
     async function check() {
@@ -19,6 +20,10 @@ const Chat = () => {
     }
     check()
   }, [])
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat)
+  }
 
 
   useEffect(() => {
@@ -40,7 +45,7 @@ const Chat = () => {
     <>
       <section className='chat-page'>
         <div className="container">
-          <Contacts contacts={contacts} currentUser={currentUser} />
+          <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
         </div>
       </section>
     </>

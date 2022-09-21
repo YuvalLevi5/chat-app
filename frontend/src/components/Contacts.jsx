@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Logo from '../assets/logo.svg'
-const Contacts = ({ contacts, currentUser }) => {
+const Contacts = ({ contacts, currentUser, changeChat }) => {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
@@ -16,10 +16,9 @@ const Contacts = ({ contacts, currentUser }) => {
   }, [currentUser]);
 
   const changeCurrentChat = (index, contact) => {
-
+    setCurrentSelected(index)
+    changeChat(contact)
   }
-
-  console.log('hi')
 
   return (
     <>
