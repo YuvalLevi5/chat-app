@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use("/api/auth", userRoutes)
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect('mongodb+srv://yuvallevi5:21227159@cluster0.xabqg.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { allUsersRoute } from '../utils/ApiRoutes'
+import Contacts from '../components/Contacts'
 
 const Chat = () => {
   const navigate = useNavigate()
@@ -39,7 +40,7 @@ const Chat = () => {
     <>
       <section className='chat-page'>
         <div className="container">
-
+          <Contacts contacts={contacts} currentUser={currentUser} />
         </div>
       </section>
     </>
