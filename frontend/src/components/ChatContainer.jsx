@@ -5,22 +5,22 @@ const ChatContainer = ({ currentChat }) => {
     <>
       {
         currentChat && (
-          <section>
-            <div className="chat-header">
-              <div className="user-details">
-                <div className="avatar">
+          <section className='chat-container'>
+            <div className='chat-header'>
+              <div className='user-details'>
+                <div className='avatar'>
                   <img
                     src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
-                    alt="avatar"
+                    alt='avatar'
                   />
                 </div>
-                <div className="username">
+                <div className='username'>
                   <h3>{currentChat.username}</h3>
                 </div>
               </div>
             </div>
-            <div className="chat-messages"></div>
-            <div className="chat-input"></div>
+            <div className='chat-messages'></div>
+            <div className='chat-input'></div>
           </section >
         )
       }
