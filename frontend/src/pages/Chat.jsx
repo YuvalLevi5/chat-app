@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { allUsersRoute } from '../utils/ApiRoutes'
 import Contacts from '../components/Contacts'
+import Welcome from '../components/Welcome'
 
 const Chat = () => {
   const navigate = useNavigate()
@@ -21,11 +22,6 @@ const Chat = () => {
     check()
   }, [])
 
-  const handleChatChange = (chat) => {
-    setCurrentChat(chat)
-  }
-
-
   useEffect(() => {
     async function checkUser() {
       if (currentUser) {
@@ -41,11 +37,16 @@ const Chat = () => {
   }, [currentUser])
 
 
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat)
+  }
+
   return (
     <>
       <section className='chat-page'>
         <div className="container">
           <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+          <Welcome currentUser={currentUser} />
         </div>
       </section>
     </>
