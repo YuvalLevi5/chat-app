@@ -1,5 +1,7 @@
 const host = "http://localhost:3030";
-export const loginRoute = `${host}/api/auth/login`
-export const registerRoute = `${host}/api/auth/register`
-export const setAvatarRoute = `${host}/api/auth/setAvatar`
-export const allUsersRoute = `${host}/api/auth/allusers`;
+const BASE_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:3030'
+
+export const loginRoute = `${BASE_URL}/api/auth/login`
+export const registerRoute = `${BASE_URL}/api/auth/register`
+export const setAvatarRoute = `${BASE_URL}/api/auth/setAvatar`
+export const allUsersRoute = `${BASE_URL}/api/auth/allusers`;
