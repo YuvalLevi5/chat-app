@@ -1,12 +1,13 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-
+const socket = require('socket.io')
 // Routes
 const userRoutes = require('./routes/userRoutes')
 const messageRoutes = require('./routes/messagesRoutes')
 
 const app = express()
+const http = require('http').createServer(app)
 require('dotenv').config()
 
 app.use(cors())
@@ -38,6 +39,28 @@ mongoose.connect('mongodb+srv://yuvallevi5:21227159@cluster0.xabqg.mongodb.net/?
     console.log('DB connection made')
 }).catch(err => console.error(err))
 
-const server = app.listen(process.env.PORT, () => {
+const server = http.listen(process.env.PORT, () => {
     console.log('App listening on port ' + process.env.PORT)
+})
+
+const io = socket(server, {
+    cors: {
+        origin: '*',
+        credentials: true
+    }
+})
+
+global.onlineUsers = new Map();
+io.on("connection", (socket) => {
+  global.chatSocket = socket;
+  socket.on("add-user", (userId) => {
+    onlineUsers.set(userId, socket.id);
+  });
+
+  socket.on("send-msg", (data) => {
+    const sendUserSocket = onlineUsers.get(data.to);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("msg-recieve", data.message);
+    }
+  });
 })

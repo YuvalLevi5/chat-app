@@ -5,24 +5,29 @@ import axios from 'axios'
 import { v4 as uuidv4 } from "uuid";
 import { getAllMessageRoute, sendMessageRoute } from '../utils/ApiRoutes'
 
-const ChatContainer = ({ currentChat, currentUser }) => {
+const ChatContainer = ({ currentChat, currentUser, socket }) => {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
+    if (currentChat) {
 
-    async function getCurrentChat() {
-      const response = await axios.post(getAllMessageRoute, {
-        from: currentUser._id,
-        to: currentChat._id
-      })
-      setMessages(response.data);
+      async function getCurrentChat() {
+        const data = await JSON.parse(
+          localStorage.getItem('chat-app-user')
+        );
+        const response = await axios.post(getAllMessageRoute, {
+          from: data._id,
+          to: currentChat._id
+        })
+        setMessages(response.data);
+      }
+      getCurrentChat()
     }
-    getCurrentChat()
 
   }, [currentChat])
 
-  console.log(currentUser)
 
   const handleSendMsg = async (msg) => {
     await axios.post(sendMessageRoute, {
@@ -30,7 +35,36 @@ const ChatContainer = ({ currentChat, currentUser }) => {
       to: currentChat._id,
       message: msg
     })
+
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: currentUser._id,
+      message: msg,
+    });
+
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    setMessages(msgs);
   }
+
+  useEffect(() => {
+    if (socket.current) {
+      console.log('hiiiii')
+      socket.current.on("msg-recieve", (msg) => {
+        console.log(msg)
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
 
   return (
     <>
