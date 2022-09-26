@@ -43,6 +43,7 @@ const Chat = () => {
     setCurrentChat(chat)
   }
 
+
   return (
     <>
       <section className='chat-page'>

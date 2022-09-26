@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ChatInput from './ChatInput'
 import Logout from './Logout'
 import axios from 'axios'
-import { sendMessageRoute } from '../utils/ApiRoutes'
+import { v4 as uuidv4 } from "uuid";
+import { getAllMessageRoute, sendMessageRoute } from '../utils/ApiRoutes'
 
 const ChatContainer = ({ currentChat, currentUser }) => {
+  const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
+
+  useEffect(() => {
+
+    async function getCurrentChat() {
+      const response = await axios.post(getAllMessageRoute, {
+        from: currentUser._id,
+        to: currentChat._id
+      })
+      setMessages(response.data);
+    }
+    getCurrentChat()
+
+  }, [currentChat])
+
+  console.log(currentUser)
+
   const handleSendMsg = async (msg) => {
     await axios.post(sendMessageRoute, {
       from: currentUser._id,
@@ -32,7 +51,22 @@ const ChatContainer = ({ currentChat, currentUser }) => {
               </div>
               <Logout />
             </div>
-            <div className='chat-messages'></div>
+            <div className='chat-messages'>
+              {messages.map((message) => {
+                return (
+                  <div ref={scrollRef} key={uuidv4()}>
+                    <div
+                      className={`message ${message.fromSelf ? "sended" : "recieved"
+                        }`}
+                    >
+                      <div className="content ">
+                        <p>{message.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
             <ChatInput handleSendMsg={handleSendMsg} />
           </section >
         )
