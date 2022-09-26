@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 // Routes
 const userRoutes = require('./routes/userRoutes')
+const messageRoutes = require('./routes/messagesRoutes')
 
 const app = express()
 require('dotenv').config()
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use("/api/auth", userRoutes)
+app.use("/api/messages", messageRoutes)
 
 mongoose.connect('mongodb+srv://yuvallevi5:21227159@cluster0.xabqg.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,

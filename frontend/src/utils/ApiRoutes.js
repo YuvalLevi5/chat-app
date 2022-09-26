@@ -4,4 +4,5 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:
 export const loginRoute = `${BASE_URL}/api/auth/login`
 export const registerRoute = `${BASE_URL}/api/auth/register`
 export const setAvatarRoute = `${BASE_URL}/api/auth/setAvatar`
-export const allUsersRoute = `${BASE_URL}/api/auth/allusers`;
+export const allUsersRoute = `${BASE_URL}/api/auth/allusers`
+export const sendMessageRoute = `${BASE_URL}/api/messages/addmsg`;

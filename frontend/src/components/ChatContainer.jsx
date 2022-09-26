@@ -1,10 +1,16 @@
 import React from 'react'
 import ChatInput from './ChatInput'
 import Logout from './Logout'
+import axios from 'axios'
+import { sendMessageRoute } from '../utils/ApiRoutes'
 
-const ChatContainer = ({ currentChat }) => {
+const ChatContainer = ({ currentChat, currentUser }) => {
   const handleSendMsg = async (msg) => {
-    console.log(msg)
+    await axios.post(sendMessageRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg
+    })
   }
 
   return (
