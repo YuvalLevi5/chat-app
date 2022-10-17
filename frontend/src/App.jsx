@@ -16,8 +16,6 @@ const App = () => {
           <Route path="" element={<Chat />} />
         </Routes>
       </div>
-      {/* <NavLink to="/register">Bla</NavLink>
-      <NavLink to="/login">Bla</NavLink> */}
     </Router>
   )
 }

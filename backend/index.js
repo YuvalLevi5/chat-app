@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const socket = require('socket.io')
+const path = require('path')
 // Routes
 const userRoutes = require('./routes/userRoutes')
 const messageRoutes = require('./routes/messagesRoutes')

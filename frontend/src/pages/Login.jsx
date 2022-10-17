@@ -38,7 +38,7 @@ export default function Login() {
       return false;
     }
     return true;
-  };
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
